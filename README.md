@@ -1,38 +1,28 @@
-# FormatWordFile
+:
 
-## Click link to view video in YouTube <br/>
+🚀 FormatWordFile
+▶️ Veja o vídeo no YouTube
+version = '1.0'
 
-https://www.youtube.com/embed/EXt5x-1ZlGE
-       
-       
-__version__ = '1.0'
+✨ Funcionalidades
+🔒 Formatação por padrões de serviço (ex: SSH, WIFI/WPA, SQL Server, AWS, Windows)
+🧹 Remoção de caracteres especiais e espaços em branco
+📏 Filtragem por tamanho mínimo e máximo conforme o serviço escolhido
+🇧🇷 Descrição
+Basicamente, este script formata uma wordlist/dicionário de senhas, mantendo apenas as palavras que seguem o padrão desejado para o serviço escolhido.
 
-+ Formatação por padrões de serviço ex: SSH, WIFI/WPA etc.. "Version 1.0"
-+ Formatação com remoção de caracteres especiais e espaços em branco "Version 1.0"
+Exemplo de uso:
 
-//EN_US
+Após a formatação, só permanecem palavras válidas para o serviço selecionado.
 
-+ Formatting by service standards e.g. SSH, WIFI/WPA, etc. "Version 1.0"
-+ Formatting with removal of special characters and blanks "Version 1.0"
+🇺🇸 English
+Basically, this script formats a wordlist/dictionary, keeping only the words that match the desired pattern for the selected service.
 
+Example:
 
-+ Basicamente, esse script vai formatar um wordlist/dict.
-+ Ex:
-+      palavra1
-+      teste1
+After formatting, only words valid for the chosen service remain.
 
-
-+ Formatando as palavras mantendo um padrão desejado para o tipo de serviço que deseja utilizar.
-
-//English
-
-+ Basically, this script will format a wordlist/dict. 
-+ Ex: 
-+       bigword
-+       test1
-       
-+ Removing all words with a number equal to or less than "x" caracters.
-
-
-## author @gsLukas 
-## colaborator @zNairy
+📝 Remove todas as palavras com número de caracteres menor ou maior que o permitido pelo padrão.
+🔗 Fácil de expandir para novos serviços e regras.
+👤 Author: @gsLukas
+🤝 Collaborator: @zNairy
