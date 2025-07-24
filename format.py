@@ -33,50 +33,29 @@ newFile = input(f'{BColors.OK}New Path:{BColors.RESET}')
 
 print (f"{BColors.WARNING}\nEN-US// Standard WIFI/wpa format \nPT_BR// Formato padrão WIFI/wpa (Min 8 Max 64): Press 1{BColors.RESET}")
 print (f"{BColors.WARNING}\nEN-US// Standard SSH format \nPT_BR// Formato padrão SSH (Min 1 Max 256): Press 2{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard AWS format \nPT_BR// Formato padrão AWS (Min 8 Max 128): Press 3{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard Windows format \nPT_BR// Formato padrão Windows (Min 1 Max 14): Press 4{BColors.RESET}")
-print (f"{BColors.WARNING}\nEN-US// Standard SQL Server format \nPT_BR// Formato padrão SQL Server (Min 8 Max 128): Press 5{BColors.RESET}")
+print (f"{BColors.WARNING}\nEN-US// Standard Windows format \nPT_BR// Formato padrão Windows (Min 1 Max 14): Press 3{BColors.RESET}")
+print (f"{BColors.WARNING}\nEN-US// Standard AWS/SQL Server format \nPT_BR// Formato padrão AWS/SQL Server (Min 8 Max 128): Press 4{BColors.RESET}")
 
-option = input(f"{BColors.OK}Select:{BColors.RESET} ")
+option = input(f"{BColors.OK}Select:{BColors.RESET} ").strip()
 
-if option.isdigit() and option == 1:
+
+def format_words(input_file, output_file, min_len, max_len):
     print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
+    with open(output_file, 'w') as out:
+        for word in WordsFile(input_file):
             word = "".join(w for w in word.split())
-            if len(word) >= 8 and len(word) <= 64:
-                outputFile.write(word + "\n")
+            if min_len <= len(word) <= max_len:
+                out.write(word + "\n")
 
-elif option.isdigit() and option == 2:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 1 and len(word) <= 256:
-                outputFile.write(word + "\n")
+formats = {
+    "1": (8, 64),      # WIFI/wpa
+    "2": (1, 256),     # SSH
+    "3": (1, 14),      # Windows
+    "4": (8, 128),     # AWS/SQL Server
+}
 
-elif option.isdigit() and option == 3:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 8 and len(word) <= 128:
-                outputFile.write(word + "\n")
-
-elif option.isdigit() and option == 4:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 1 and len(word) <= 14:
-                outputFile.write(word + "\n")
-
-elif option.isdigit() and option == 5:
-    print(f'{BColors.FAIL}\nFormatting please wait for writing confirmation!{BColors.RESET}')
-    with open(newFile, 'w') as outputFile:
-        for word in WordsFile(file):
-            word = "".join(w for w in word.split())
-            if len(word) >= 8 and len(word) <= 128:
-                outputFile.write(word + "\n")
+if option in formats:
+    min_len, max_len = formats[option]
+    format_words(inputFile, newFile, min_len, max_len)
 else:
     print(f"{BColors.FAIL}Invalid Option!{BColors.RESET}")

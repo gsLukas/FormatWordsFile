@@ -6,6 +6,16 @@ class WordsFile(object):
     
     def __init__(self, namefile):
         self.namefile = namefile
+        # Tenta abrir e ler uma linha para validar se é texto
+        try:
+            with open(namefile, 'r', errors='strict') as testfile:
+                testline = testfile.readline()
+        except UnicodeDecodeError:
+            print(f'{BColors.FAIL}O arquivo informado não é um arquivo de texto válido (problema de codificação)!{BColors.RESET}')
+            exit(1)
+        except Exception as e:
+            print(f'{BColors.FAIL}Erro ao abrir o arquivo: {e}{BColors.RESET}')
+            exit(1)
         self.wordlist = self.loadContent()
         self.currentLine = ''
 
@@ -13,15 +23,22 @@ class WordsFile(object):
         return self
 
     def __next__(self):
-        self.currentLine = self.wordlist.readline()
-        if self.currentLine:
+        import re
+        while True:
+            self.currentLine = self.wordlist.readline()
+            if not self.currentLine:
+                raise StopIteration
             self.currentLine = self.currentLine.strip()
-            if self.currentLine and any(w.isalpha() for w in self.currentLine):
-                return self.currentLine
-                
-            self.__next__()
-
-        raise StopIteration
+            # Ignorar linhas vazias ou só com espaços
+            if not self.currentLine:
+                continue
+            # Ignorar linhas com caracteres inválidos (apenas letras, números e símbolos comuns)
+            if not re.match(r'^[\w\d\-\_\!@#\$%\^&\*\(\)\[\]\{\}\.,;:\'"/\\]+$', self.currentLine):
+                continue
+            # Ignorar linhas sem nenhuma letra
+            if not any(w.isalpha() for w in self.currentLine):
+                continue
+            return self.currentLine
 
     def loadContent(self):
         try:
